@@ -1,0 +1,139 @@
+{
+  "publisher": "webxmsj",
+  "name": "open-browser",
+  "displayName": "Open repository in browser",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@8.1.1",
+  "description": "Add a button to open current project in browser",
+  "author": "webxmsj <webxmsj@163.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/webxmsj",
+  "homepage": "https://github.com/webxmsj/open-browser#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webxmsj/open-browser"
+  },
+  "bugs": {
+    "url": "https://github.com/webxmsj/open-browser/issues"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/webxmsj"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "open-browser.open",
+        "category": "open-browser",
+        "title": "open repository in browser"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "open repository in browser extension configuration",
+      "properties": {
+        "open-browser.textTransform": {
+          "type": "string",
+          "enum": [
+            "none",
+            "uppercase",
+            "lowercase",
+            "capitalize"
+          ],
+          "default": "capitalize",
+          "description": "Defines project name text style inside template"
+        },
+        "open-browser.colorful": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use color"
+        },
+        "open-browser.color": {
+          "type": "string",
+          "default": "",
+          "description": "The color of status text. When not defined, a random color will be used based on the project name."
+        },
+        "open-browser.remoteName": {
+          "type": "string",
+          "default": "origin",
+          "description": "Name of the remote repository"
+        },
+        "open-browser.branch": {
+          "type": "string",
+          "description": "Name of the remote branch",
+          "default": "master"
+        },
+        "open-browser.useLocalBranch": {
+          "type": "boolean",
+          "description": "Use the local branch instead of the fixed remote branch",
+          "default": true
+        },
+        "open-browser.useLocalRange": {
+          "type": "boolean",
+          "description": "Highlight the local selection range, if there's one",
+          "default": true
+        },
+        "open-browser.alignPriority": {
+          "type": "number",
+          "default": 100000,
+          "description": "Defines priority of the label. Higher values mean the label should be shown more to the left, requires restart of vscode"
+        },
+        "open-browser.useLocalLine": {
+          "type": "boolean",
+          "description": "Highlight the local line if there's no selection range",
+          "default": false
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --external vscode",
+    "dev": "nr build --watch",
+    "lint": "eslint .",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish",
+    "pack": "vsce package",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp && nr publish"
+  },
+  "devDependencies": {
+    "@antfu/ni": "^0.21.2",
+    "@types/findup-sync": "^4.0.2",
+    "@types/lodash": "^4.14.194",
+    "@types/node": "^18.15.11",
+    "@types/vscode": "^1.77.0",
+    "@vscode/vsce": "^2.19.0",
+    "@webxmsj/eslint-config": "^0.0.11",
+    "bumpp": "^9.1.0",
+    "eslint": "^8.37.0",
+    "esno": "^0.16.3",
+    "pnpm": "^8.1.1",
+    "rimraf": "^4.4.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.3",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.8"
+  },
+  "dependencies": {
+    "find-up": "^6.3.0",
+    "findup-sync": "^5.0.0",
+    "lodash": "^4.17.21",
+    "pify": "^6.1.0",
+    "simple-git": "^3.18.0"
+  }
+}
