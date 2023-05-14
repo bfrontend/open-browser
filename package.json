@@ -111,6 +111,13 @@
     "typecheck": "tsc --noEmit",
     "release": "bumpp && nr publish"
   },
+  "dependencies": {
+    "find-up": "^6.3.0",
+    "findup-sync": "^5.0.0",
+    "lodash": "^4.17.21",
+    "pify": "^6.1.0",
+    "simple-git": "^3.18.0"
+  },
   "devDependencies": {
     "@antfu/ni": "^0.21.2",
     "@types/findup-sync": "^4.0.2",
@@ -128,12 +135,5 @@
     "typescript": "^5.0.3",
     "vite": "^4.2.1",
     "vitest": "^0.29.8"
-  },
-  "dependencies": {
-    "find-up": "^6.3.0",
-    "findup-sync": "^5.0.0",
-    "lodash": "^4.17.21",
-    "pify": "^6.1.0",
-    "simple-git": "^3.18.0"
   }
 }
