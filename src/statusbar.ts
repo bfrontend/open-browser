@@ -55,7 +55,7 @@ class StatusBar {
     let filePath, lines
     if (activeTextEditor) {
       const editorPath = activeTextEditor.document.uri.fsPath
-      filePath = editorPath ? editorPath.substring (this.projectPath.length + 1).replace(/\\/g, '/') : undefined
+      filePath = editorPath ? editorPath.substring (gitPath.length + 1).replace(/\\/g, '/') : undefined
       lines = this.getLines(activeTextEditor)
     }
     this.browserUrl = _.compact([repourl, 'blob', branch, filePath, lines]).join('/')
