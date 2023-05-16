@@ -12,6 +12,7 @@ const OPEN_COMMAND = 'open-repository.open'
 class StatusBar {
   statusBar: StatusBarItem
   projectPath = ''
+  gitPath = ''
   browserUrl = ''
   constructor() {
     this.statusBar = window.createStatusBarItem(StatusBarAlignment.Left, getConfig('alignPriority') as number)
@@ -45,17 +46,17 @@ class StatusBar {
   }
 
   async getBrowserUrl(textEditor?: TextEditor): Promise<string | undefined> {
-    const gitPath = await this.getGitPath()
-    if (!gitPath)
+    this.gitPath = await this.getGitPath() || ''
+    if (!this.gitPath)
       return
 
-    const repoInfo = await this.getRepoInfo(gitPath)
+    const repoInfo = await this.getRepoInfo(this.gitPath)
     const { repourl, branch } = repoInfo
     const activeTextEditor = textEditor || window.activeTextEditor
     let filePath, lines
     if (activeTextEditor) {
       const editorPath = activeTextEditor.document.uri.fsPath
-      filePath = editorPath ? editorPath.substring (gitPath.length + 1).replace(/\\/g, '/') : undefined
+      filePath = editorPath ? editorPath.substring (this.gitPath.length + 1).replace(/\\/g, '/') : undefined
       lines = this.getLines(activeTextEditor)
     }
     this.browserUrl = _.compact([repourl, 'blob', branch, filePath, lines]).join('/')
@@ -153,7 +154,7 @@ class StatusBar {
   }
 
   initBar() {
-    const projectName = getProjectName(this.projectPath)
+    const projectName = getProjectName(this.gitPath || this.projectPath)
     this.statusBar.text = `$(github) ${projectName}`
     this.statusBar.color = getProjectColor(this.projectPath)
   }

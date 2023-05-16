@@ -2,7 +2,7 @@
   "publisher": "webxmsj",
   "name": "open-browser",
   "displayName": "Open repository in browser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "packageManager": "pnpm@8.1.1",
   "description": "Add a button to open current project in browser",
