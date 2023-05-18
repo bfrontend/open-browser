@@ -155,7 +155,8 @@ class StatusBar {
 
   initBar() {
     const projectName = getProjectName(this.gitPath || this.projectPath)
-    this.statusBar.text = `$(github) ${projectName}`
+    const showProjectName = getConfig('projectNameVisible')
+    this.statusBar.text = showProjectName ? `$(github) ${projectName}` : '$(github)'
     this.statusBar.color = getProjectColor(this.projectPath)
   }
 
